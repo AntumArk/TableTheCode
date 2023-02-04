@@ -943,11 +943,11 @@
     (path "/edeb38ef-56c5-48ff-a362-d92a4c7d280d/b1e399ac-6c8f-434a-ae6c-3765997a7271"
       (reference "#PWR018") (unit 1) (value "GND") (footprint "")
     )
-    (path "/1a26fc34-5bb5-46bc-a5a1-4b7ad1ae8c1b/f0fece59-c5e2-4bed-86f3-9089d5456e0a"
-      (reference "#PWR?") (unit 1) (value "+5V") (footprint "")
-    )
     (path "/861a184f-1e37-4cbd-92a4-773fa2a72d4d/f0fece59-c5e2-4bed-86f3-9089d5456e0a"
-      (reference "#PWR?") (unit 1) (value "+5V") (footprint "")
+      (reference "#PWR0101") (unit 1) (value "+5V") (footprint "")
+    )
+    (path "/1a26fc34-5bb5-46bc-a5a1-4b7ad1ae8c1b/f0fece59-c5e2-4bed-86f3-9089d5456e0a"
+      (reference "#PWR0102") (unit 1) (value "+5V") (footprint "")
     )
     (path "/d0a0deb1-4f0f-4ede-b730-2c6d67cb9618"
       (reference "A1") (unit 1) (value "Arduino_Nano_v2.x") (footprint "Module:Arduino_Nano")
