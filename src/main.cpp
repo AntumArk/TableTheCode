@@ -15,11 +15,13 @@ void setupSteppers()
 	leftStepper.setAcceleration(ACCELERATION);
 	leftStepper.setSpeed(0);
 	leftStepper.setEnablePin(LEFT_EN_PIN);
+	leftStepper.setPinsInverted(false,false,true);
 
 	rightStepper.setMaxSpeed(MAX_SPEED);
 	rightStepper.setAcceleration(ACCELERATION);
 	rightStepper.setSpeed(0);
 	rightStepper.setEnablePin(RIGHT_EN_PIN);
+	rightStepper.setPinsInverted(false,false,true);
 }
 
 void moveSteppers(int leftSpeed, int rightSpeed)
@@ -38,9 +40,10 @@ void moveStepper(AccelStepper stepper, int speed)
 	else
 	{
 		stepper.enableOutputs();
+	
+	}	
 		stepper.setSpeed(speed);
-		stepper.runSpeed();
-	}
+		stepper.runSpeed();		
 }
 
 void setup()
@@ -55,7 +58,7 @@ void loop()
 
 	int leftSteps = 0;
 	int rightSteps = 0;
-	int stepsPerRot = STEPS_PER_ROT;
+	int stepsPerRot = MAX_SPEED;
 	inputValue = readButtons();	
 	
 	switch (inputValue)

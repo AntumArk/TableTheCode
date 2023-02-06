@@ -14,9 +14,9 @@ const int rStepPin = 6; // 6;//3
 #define MOTOR_INTERFACE_TYPE 1
 #define MAX_SPEED 1000
 #define ACCELERATION 50
-#define STEPS_PER_ROT 200
+#define STEPS_PER_ROT 1000
 
-#define LOOP_WAIT_TIME 100
+#define LOOP_WAIT_TIME 1
 #define BAUD_RATE 9600
 
 void setupSteppers();
