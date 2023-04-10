@@ -5,37 +5,13 @@ int inputValue = 0;
 
 // Creates an instance
 
-FastAccelStepperEngine engine = FastAccelStepperEngine();
-FastAccelStepper *leftStepper = NULL;
-FastAccelStepper *rightStepper = NULL;
+// 2-wire basic config, microstepping is hardwired on the driver
+// Other drivers can be mixed and matched but must be configured individually
+Motor leftStepper(lDirPin, lStepPin, LEFT_EN_PIN);
+Motor rightStepper(rDirPin, rStepPin, RIGHT_EN_PIN);
 
 void setupSteppers()
 {
-
-	engine.init();
-	leftStepper = engine.stepperConnectToPin(lStepPin);
-
-	if (leftStepper)
-	{
-		leftStepper->setDirectionPin(lDirPin);
-		leftStepper->setEnablePin(LEFT_EN_PIN);
-		leftStepper->setAutoEnable(true);
-
-		leftStepper->setSpeedInUs(MAX_SPEED); // the parameter is us/step !!!
-		leftStepper->setAcceleration(ACCELERATION);
-	}
-
-	rightStepper = engine.stepperConnectToPin(rStepPin);
-
-	if (rightStepper)
-	{
-		rightStepper->setDirectionPin(rDirPin);
-		rightStepper->setEnablePin(RIGHT_EN_PIN);
-		rightStepper->setAutoEnable(true);
-
-		rightStepper->setSpeedInUs(MAX_SPEED); // the parameter is us/step !!!
-		rightStepper->setAcceleration(ACCELERATION);
-	}
 }
 
 void moveSteppers(int leftSpeed, int rightSpeed)
@@ -44,17 +20,17 @@ void moveSteppers(int leftSpeed, int rightSpeed)
 	moveStepper(rightStepper, rightSpeed);
 }
 
-void moveStepper(FastAccelStepper *stepper, int speed)
+void moveStepper(Motor stepper, int speed)
 {
-	if (speed != 0)
-	{
-		stepper->move(speed);
-	}
+
+	stepper.Spin(speed);
 }
 
 void setup()
 {
+	#ifdef DEBUGING_COMMS
 	Serial.begin(BAUD_RATE);
+	#endif
 	setupButtons();
 	setupSteppers();
 }
@@ -71,23 +47,31 @@ void loop()
 	{
 	case LEFT:
 		/* code */
+		#ifdef DEBUGING_COMMS
 		Serial.println("Moving Left UP");
+		#endif
 		leftSteps = stepsPerRot;
 		break;
 	case RIGHT:
 		/* code */
+		#ifdef DEBUGING_COMMS
 		Serial.println("Moving Right UP");
+		#endif
 		rightSteps = stepsPerRot;
 		break;
 	case UP:
 		/* code */
+		#ifdef DEBUGING_COMMS
 		Serial.println("Moving UP");
+		#endif
 		leftSteps = stepsPerRot;
 		rightSteps = stepsPerRot;
 		break;
 	case DOWN:
 		/* code */
+		#ifdef DEBUGING_COMMS
 		Serial.println("Moving DOWN");
+		#endif
 		leftSteps = -stepsPerRot;
 		rightSteps = -stepsPerRot;
 		break;
@@ -100,5 +84,5 @@ void loop()
 	moveSteppers(leftSteps, rightSteps);
 #endif
 
-	delay(LOOP_WAIT_TIME);
+	//delayMicroseconds(LOOP_WAIT_TIME);
 }
